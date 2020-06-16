@@ -1,0 +1,22 @@
+{
+  "history": [
+    {
+      "id": 1,
+      "pangkalan": "Pangkalan LPG Wahyu",
+      "tanggal": "4 Juni 2020",
+      "photo": "https://nusantaranews86.com/wp-content/uploads/2018/05/IMG-20180517-WA0018.jpg"
+    },
+    {
+      "id": 2,
+      "pangkalan": "Zulfan Effendi",
+      "tanggal": "3 Juni 2020",
+      "photo": "https://lh3.googleusercontent.com/D3KjtCAeB4egzZT0TB8lu5WA8qhebXNNc6UE4IE9BUMOc3ro_oK8EcNJCNWYiXZXwc_fWZCM=w1080-h608-p-no-v0"
+    },
+    {
+      "id": 3,
+      "pangkalan": "Ema Suriani",
+      "tanggal": "2 Juni 2020",
+      "photo": "https://pertamina.com/Media/Image/post/IMG-20190806-WA0004.jpg"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+-Stok 
+    -{
+        id_pangkalan,
+        nama_pangkalan,
+        total_stok,
+        gas3kg,
+        gas12kg,
+        brightgas
+    }
+
+-pesan
+    -{
+        id_pesan,
+        id_pembeli,
+        id_pangkalan,
+        tanggal,
+        gas3kg,
+        gas12kg,
+        brightgas,
+        total,
+        status
+    }
