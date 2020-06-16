@@ -13,24 +13,17 @@ const initialState = {
   total: '',
   statusPesanan: '',
   status: '',
+  listPesanan: [],
+  totalPesanan: null,
 };
 
 const pesanReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PESANAN:
+      let totalPesanan = action.pesanan.pesan.length;
       return Object.assign({}, state, {
-        idPangkalan: action.pesanan.pesan.idPangkalan,
-        idPembeli: action.pesanan.pesan.idPembeli,
-        namaPangkalan: action.pesanan.pesan.namaPangkalan,
-        namaPembeli: action.pesanan.pesan.namaPembeli,
-        photoPembeli: action.pesanan.pesan.photoPembeli,
-        tanggal: action.pesanan.pesan.tanggal,
-        gas3Kg: action.pesanan.pesan.gas3Kg,
-        gas12Kg: action.pesanan.pesan.gas12Kg,
-        brightGas: action.pesanan.pesan.brightGas,
-        total: action.pesanan.pesan.totalStok,
-        statusPesanan: action.pesanan.pesan.totalStok,
-        status: action.status,
+        listPesanan: action.pesanan.pesan,
+        totalPesanan: totalPesanan,
       });
     case PESAN_FAILED:
       return Object.assign({}, state, {

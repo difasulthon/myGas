@@ -2,20 +2,22 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View, Image, Text, FlatList} from 'react-native';
 import {Header, List, Gap} from '../../components';
 import {colors, fonts} from '../../utils';
-import {JSONPesanan, ILPesanan} from '../../assets';
+import {ILPesanan} from '../../assets';
 import {useDispatch, useSelector} from 'react-redux';
 import {getDataPesananAction} from '../../redux/action/pesan';
 
 const Pesanan = ({navigation}) => {
-  const [data, setData] = useState(JSONPesanan.pesanan);
+  const [data, setData] = useState([]);
 
   const userId = useSelector(state => state.authReducer.userId);
+  const listPesanan = useSelector(state => state.pesanReducer.listPesanan);
 
   const dispatch = useDispatch();
 
   const getDataPesanan = useCallback(() => {
     dispatch(getDataPesananAction(userId));
-  }, [dispatch, userId]);
+    setData(listPesanan);
+  }, [dispatch, userId, listPesanan]);
 
   useEffect(() => {
     getDataPesanan();
@@ -40,8 +42,8 @@ const Pesanan = ({navigation}) => {
               onPress={() =>
                 navigation.navigate('DetailPesanan', {type: 'seller'})
               }
-              photo={{uri: item.item.photo}}
-              nama={item.item.pemesan}
+              photo={{uri: item.item.photoPembeli}}
+              nama={item.item.namaPembeli}
               desc={item.item.total}
               gas
             />

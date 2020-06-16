@@ -13,13 +13,14 @@ import {useSelector} from 'react-redux';
 
 const HomeSeller = ({navigation}) => {
   const [stok, setStok] = useState(null);
+  const [pesanan, setPesanan] = useState(null);
   const totalStok = useSelector(state => state.stokReducer.totalStok);
-  console.log('totalStok: ', totalStok);
+  const totalPesanan = useSelector(state => state.pesanReducer.totalPesanan);
 
   useEffect(() => {
     setStok(totalStok);
-    console.log('totalStok: ', totalStok);
-  }, [totalStok]);
+    setPesanan(totalPesanan);
+  }, [totalStok, totalPesanan]);
 
   return (
     <View style={styles.page}>
@@ -29,7 +30,7 @@ const HomeSeller = ({navigation}) => {
       <TouchableOpacity style={styles.kotak}>
         <View>
           <Text style={styles.textDesc}>Pesanan</Text>
-          <Text style={styles.textDesc}>16</Text>
+          <Text style={styles.textDesc}>{pesanan}</Text>
         </View>
         <View style={styles.borderVertical} />
         <View>
@@ -58,7 +59,7 @@ const HomeSeller = ({navigation}) => {
               onPress={() => navigation.navigate('Pesanan')}
               title="Cek Pesanan"
               desc="Pembeli anda sedang menunggu"
-              total="16"
+              total={pesanan}
               pesanan
             />
           </View>
