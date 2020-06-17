@@ -9,6 +9,7 @@ export const PESAN_SUCCESS = 'PESAN_SUCCESS';
 export const PESAN_FAILED = 'PESAN_FAILED';
 export const SET_PESANAN = 'SET_PESANAN';
 export const SET_HISTORY = 'SET_HISTORY';
+export const LOG_OUT = 'LOG_OUT';
 
 export const POST = 'POST';
 export const GET = 'GET';

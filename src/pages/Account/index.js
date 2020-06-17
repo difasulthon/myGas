@@ -1,13 +1,40 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View, Alert} from 'react-native';
 import {List, User, Button, Gap} from '../../components';
 import {colors} from '../../utils';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {logOutAction} from '../../redux/action/auth';
 
 const Account = ({navigation}) => {
   const fullName = useSelector(state => state.authReducer.fullName);
   const role = useSelector(state => state.authReducer.role);
   const photo = useSelector(state => state.authReducer.photo);
+  const userId = useSelector(state => state.authReducer.userId);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userId === '') {
+      navigation.replace('Login');
+    }
+  }, [navigation, userId]);
+
+  const logOut = () => {
+    Alert.alert('Logout', 'Apakah anda yakin ?', [
+      {
+        text: 'Batal',
+        onPress: () => {
+          return;
+        },
+      },
+      {
+        text: 'Ya',
+        onPress: () => {
+          dispatch(logOutAction());
+        },
+      },
+    ]);
+  };
 
   return (
     <View style={styles.page}>
@@ -37,7 +64,7 @@ const Account = ({navigation}) => {
       </View>
       <View>
         <View style={styles.buttonWrapper}>
-          <Button type="secondary" title="Logout" />
+          <Button type="secondary" title="Logout" onPress={logOut} />
         </View>
         <View style={styles.border} />
       </View>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View, ScrollView, Alert} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {Header, Profile, Input, Button, Gap} from '../../components';
 import {colors, useForm, showError} from '../../utils';
@@ -41,7 +41,20 @@ const EditProfile = ({navigation}) => {
   };
 
   const updateProfile = () => {
-    dispatch(updateProfileAction(form, photoForDB));
+    Alert.alert('Update Profile', 'Apakah anda yakin ?', [
+      {
+        text: 'Batal',
+        onPress: () => {
+          return;
+        },
+      },
+      {
+        text: 'Ya',
+        onPress: () => {
+          dispatch(updateProfileAction(form, photoForDB));
+        },
+      },
+    ]);
   };
 
   return (

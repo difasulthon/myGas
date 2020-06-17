@@ -7,6 +7,7 @@ import {
   AUTH_FAILED,
   showError,
   POST_UpdateProfile,
+  LOG_OUT,
 } from '../../utils';
 
 export const signUpAction = (form, photo) => {
@@ -54,6 +55,12 @@ export const updateProfileAction = (form, photo) => {
       .catch(err => {
         dispatch(authFailed(err));
       });
+  };
+};
+
+export const logOutAction = () => {
+  return {
+    type: LOG_OUT,
   };
 };
 

@@ -1,4 +1,4 @@
-import {SET_USER, AUTH_FAILED} from '../../utils';
+import {SET_USER, AUTH_FAILED, LOG_OUT} from '../../utils';
 
 const initialState = {
   userId: '',
@@ -26,6 +26,16 @@ const authReducer = (state = initialState, action) => {
     case AUTH_FAILED:
       return Object.assign({}, state, {
         status: action.status,
+      });
+    case LOG_OUT:
+      return Object.assign({}, state, {
+        userId: '',
+        fullName: '',
+        role: '',
+        email: '',
+        photo: '',
+        token: '',
+        status: '',
       });
   }
   return state;
