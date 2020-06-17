@@ -1,4 +1,4 @@
-import {INPUT_STOK_SUCCESS, STOK_FAILED} from '../../utils';
+import {INPUT_STOK_SUCCESS, STOK_FAILED, SET_LIST_STOK} from '../../utils';
 
 const initialState = {
   idPangkalan: '',
@@ -8,6 +8,7 @@ const initialState = {
   gas3Kg: '',
   gas12Kg: '',
   brightGas: '',
+  listStok: '',
   status: '',
 };
 
@@ -26,6 +27,11 @@ const stokReducer = (state = initialState, action) => {
       });
     case STOK_FAILED:
       return Object.assign({}, state, {
+        status: action.status,
+      });
+    case SET_LIST_STOK:
+      return Object.assign({}, state, {
+        listStok: action.stok.stok,
         status: action.status,
       });
   }

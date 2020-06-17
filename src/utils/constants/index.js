@@ -10,6 +10,8 @@ export const PESAN_FAILED = 'PESAN_FAILED';
 export const SET_PESANAN = 'SET_PESANAN';
 export const SET_HISTORY = 'SET_HISTORY';
 export const LOG_OUT = 'LOG_OUT';
+export const SET_LIST_STOK = 'SET_LIST_STOK';
+export const CREATE_PESAN = 'CREATE_PESAN';
 
 export const POST = 'POST';
 export const GET = 'GET';

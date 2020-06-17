@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {
-  Icon3kg,
-  Icon12kg,
-  IconBright,
-  IconMinusGas,
-  IconAddGas,
-} from '../../../assets';
+import {Icon3kg, Icon12kg, IconBright} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 import {TextInput} from 'react-native-gesture-handler';
 
-const CardGas = ({icon, nama, stok}) => {
+const CardGas = ({icon, nama, stok, value, onChangeText}) => {
+  const [border, setBorder] = useState(colors.border);
+  const onFocusForm = () => {
+    setBorder(colors.secondary);
+  };
+  const onBlurForm = () => {
+    setBorder(colors.border);
+  };
   const Icon = () => {
     if (icon === '3kg') {
       return <Icon3kg />;
@@ -23,6 +24,7 @@ const CardGas = ({icon, nama, stok}) => {
     }
     return <Icon3kg />;
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.borderIcon}>
@@ -33,9 +35,14 @@ const CardGas = ({icon, nama, stok}) => {
         <Text style={styles.stok}>Stok: {stok}</Text>
       </View>
       <View style={styles.inputWrapper}>
-        <IconMinusGas />
-        <TextInput style={styles.input} />
-        <IconAddGas />
+        <TextInput
+          style={styles.input(border)}
+          keyboardType="numeric"
+          value={value}
+          onChangeText={onChangeText}
+          onFocus={onFocusForm}
+          onBlur={onBlurForm}
+        />
       </View>
     </View>
   );
@@ -74,17 +81,16 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     fontSize: 14,
   },
-  input: {
-    borderBottomColor: colors.tertiary,
+  input: border => ({
+    borderBottomColor: border,
     borderBottomWidth: 2,
     paddingBottom: 5,
     width: 40,
     textAlign: 'center',
-  },
+  }),
   inputWrapper: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 55,
+    marginLeft: '40%',
   },
 });

@@ -134,3 +134,54 @@ export async function POST_UpdateProfile(userId, fullName, password, photo) {
     return error;
   }
 }
+
+export async function GET_AllStok() {
+  try {
+    let response = await fetch(baseURL + '/api/stok/', {
+      method: GET,
+    });
+    let responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function POST_CreatePesan(
+  idPangkalan,
+  idPembeli,
+  namaPangkalan,
+  namaPembeli,
+  photoPembeli,
+  photoPangkalan,
+  gas3Kg,
+  gas12Kg,
+  brightGas,
+  total,
+) {
+  try {
+    let response = await fetch(baseURL + '/ceratePesan', {
+      method: POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        idPangkalan: idPangkalan,
+        idPembeli: idPembeli,
+        namaPangkalan: namaPangkalan,
+        namaPembeli: namaPembeli,
+        photoPembeli: photoPembeli,
+        photoPangkalan: photoPangkalan,
+        gas3Kg: gas3Kg,
+        gas12Kg: gas12Kg,
+        brightGas: brightGas,
+        total: total,
+        status: 'PESAN',
+      }),
+    });
+    let responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    return error;
+  }
+}

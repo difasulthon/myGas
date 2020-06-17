@@ -7,6 +7,8 @@ import {
   SUCCESS,
   GET_HistoryPangkalan,
   SET_HISTORY,
+  POST_CreatePesan,
+  CREATE_PESAN,
 } from '../../utils';
 
 export const getDataPesananAction = idPangkalan => {
@@ -42,6 +44,44 @@ export const getHistoryPangkalan = idPangkalan => {
   };
 };
 
+export const addPesanAction = (
+  idPangkalan,
+  idPembeli,
+  namaPangkalan,
+  namaPembeli,
+  photoPembeli,
+  photoPangkalan,
+  gas3Kg,
+  gas12Kg,
+  brightGas,
+  total,
+) => {
+  return dispatch => {
+    POST_CreatePesan(
+      idPangkalan,
+      idPembeli,
+      namaPangkalan,
+      namaPembeli,
+      photoPembeli,
+      photoPangkalan,
+      gas3Kg,
+      gas12Kg,
+      brightGas,
+      total,
+    )
+      .then(res => {
+        if (res.message) {
+          dispatch(pesanFailed(res.message));
+        } else {
+          dispatch(createPesanSuccess(res));
+        }
+      })
+      .catch(err => {
+        dispatch(pesanFailed(err));
+      });
+  };
+};
+
 export const pesanSuccess = data => {
   return {
     type: SET_PESANAN,
@@ -62,6 +102,14 @@ export const getHistorySuccess = data => {
   return {
     type: SET_HISTORY,
     history: data,
+    status: SUCCESS,
+  };
+};
+
+export const createPesanSuccess = data => {
+  return {
+    type: CREATE_PESAN,
+    pesan: data,
     status: SUCCESS,
   };
 };

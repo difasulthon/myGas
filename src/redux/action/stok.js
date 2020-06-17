@@ -7,6 +7,8 @@ import {
   STOK_FAILED,
   INPUT_STOK_SUCCESS,
   SUCCESS,
+  GET_AllStok,
+  SET_LIST_STOK,
 } from '../../utils';
 
 export const inputStok = (
@@ -55,6 +57,22 @@ export const getDataPangkalan = idPangkalan => {
   };
 };
 
+export const getAllStok = () => {
+  return dispatch => {
+    GET_AllStok()
+      .then(res => {
+        if (res.message) {
+          dispatch(getStokFailed(res.message));
+        } else {
+          dispatch(getStokSuccess(res));
+        }
+      })
+      .catch(err => {
+        dispatch(getStokFailed(err));
+      });
+  };
+};
+
 export const stokFailed = message => {
   showError(message);
   return {
@@ -68,5 +86,21 @@ export const inputStokSuccess = data => {
     type: INPUT_STOK_SUCCESS,
     stok: data,
     status: SUCCESS,
+  };
+};
+
+export const getStokSuccess = data => {
+  return {
+    type: SET_LIST_STOK,
+    stok: data,
+    status: SUCCESS,
+  };
+};
+
+export const getStokFailed = message => {
+  showError(message);
+  return {
+    type: STOK_FAILED,
+    status: FAILED,
   };
 };

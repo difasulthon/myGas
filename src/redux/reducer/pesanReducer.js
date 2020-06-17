@@ -1,4 +1,9 @@
-import {SET_PESANAN, PESAN_FAILED, SET_HISTORY} from '../../utils';
+import {
+  SET_PESANAN,
+  PESAN_FAILED,
+  SET_HISTORY,
+  CREATE_PESAN,
+} from '../../utils';
 
 const initialState = {
   idPangkalan: '',
@@ -6,6 +11,7 @@ const initialState = {
   namaPangkalan: '',
   namaPembeli: '',
   photoPembeli: '',
+  photoPangkalan: '',
   tanggal: '',
   gas3Kg: '',
   gas12Kg: '',
@@ -34,6 +40,22 @@ const pesanReducer = (state = initialState, action) => {
       console.log('data history: ', action.history.pesan);
       return Object.assign({}, state, {
         listHistory: action.history.pesan,
+      });
+    case CREATE_PESAN:
+      return Object.assign({}, state, {
+        idPangkalan: action.pesan.pesan.idPangkalan,
+        idPembeli: action.pesan.pesan.idPembeli,
+        namaPangkalan: action.pesan.pesan.namaPangkalan,
+        namaPembeli: action.pesan.pesan.namaPembeli,
+        photoPembeli: action.pesan.pesan.photoPembeli,
+        photoPangkalan: action.pesan.pesan.photoPangkalan,
+        tanggal: action.pesan.pesan.tanggal,
+        gas3Kg: action.pesan.pesan.gas3Kg,
+        gas12Kg: action.pesan.pesan.gas12Kg,
+        brightGas: action.pesan.pesan.brightGas,
+        total: action.pesan.pesan.total,
+        statusPesanan: action.pesan.pesan.status,
+        status: action.status,
       });
   }
   return state;

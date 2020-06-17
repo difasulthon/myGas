@@ -1,13 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View, ImageBackground, FlatList} from 'react-native';
 import {colors} from '../../utils';
 import {Input, Card} from '../../components';
 import {IconSearch, ILHomeBuyer, JSONPangkalan} from '../../assets';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllStok} from '../../redux/action/stok';
 
 const Home = ({navigation}) => {
-  const [data] = useState(JSONPangkalan.pangkalan);
+  const [data, setData] = useState([]);
 
   const numColoumn = 2;
+
+  const listStok = useSelector(state => state.stokReducer.listStok);
+
+  const dispatch = useDispatch();
+
+  const getDataStok = useCallback(() => {
+    dispatch(getAllStok());
+    setData(listStok);
+  }, [dispatch, listStok]);
+
+  useEffect(() => {
+    getDataStok();
+
+    return () => getDataStok;
+  }, [getDataStok]);
 
   const formatData = (dataSet, numColoumnSet) => {
     const numberOfFullRows = Math.floor(data.length / numColoumnSet);
@@ -31,10 +48,12 @@ const Home = ({navigation}) => {
     }
     return (
       <Card
-        onPress={() => navigation.navigate('DetailPangkalan')}
+        onPress={() =>
+          navigation.navigate('DetailPangkalan', {dataPangkalan: item})
+        }
         id={item.id}
-        nama={item.nama}
-        stok={item.stok}
+        nama={item.namaPangkalan}
+        stok={item.totalStok}
         photo={{uri: item.photo}}
       />
     );
