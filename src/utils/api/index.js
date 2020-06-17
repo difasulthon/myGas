@@ -96,3 +96,19 @@ export async function GET_DataPesanan(idPangkalan) {
     return error;
   }
 }
+
+export async function GET_HistoryPangkalan(idPangkalan) {
+  console.log('on API');
+  try {
+    let response = await fetch(
+      baseURL + `/api/pesan/historyPangkalan/${idPangkalan}`,
+      {
+        method: 'GET',
+      },
+    );
+    let responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    return error;
+  }
+}

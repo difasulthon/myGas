@@ -28,7 +28,6 @@ const Button = ({type, title, onPress, icon, disable, total}) => {
 
   return (
     <TouchableOpacity style={styles.container(type)} onPress={onPress}>
-      {console.log('data total: ', total)}
       <Text style={styles.text(type)}>{title}</Text>
     </TouchableOpacity>
   );

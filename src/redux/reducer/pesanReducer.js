@@ -1,4 +1,4 @@
-import {SET_PESANAN, PESAN_FAILED} from '../../utils';
+import {SET_PESANAN, PESAN_FAILED, SET_HISTORY} from '../../utils';
 
 const initialState = {
   idPangkalan: '',
@@ -15,6 +15,7 @@ const initialState = {
   status: '',
   listPesanan: [],
   totalPesanan: null,
+  listHistory: [],
 };
 
 const pesanReducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const pesanReducer = (state = initialState, action) => {
     case PESAN_FAILED:
       return Object.assign({}, state, {
         status: action.status,
+      });
+    case SET_HISTORY:
+      console.log('data history: ', action.history.pesan);
+      return Object.assign({}, state, {
+        listHistory: action.history.pesan,
       });
   }
   return state;

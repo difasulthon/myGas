@@ -14,7 +14,7 @@ const Splash = ({navigation}) => {
     setTimeout(() => {
       let nextRoute;
       if (userId) {
-        if (role === 'pembeli') {
+        if (role === 'Pembeli') {
           nextRoute = 'MainApp';
         }
         if (role === 'pangkalan') {

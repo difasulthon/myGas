@@ -5,6 +5,8 @@ import {
   FAILED,
   SET_PESANAN,
   SUCCESS,
+  GET_HistoryPangkalan,
+  SET_HISTORY,
 } from '../../utils';
 
 export const getDataPesananAction = idPangkalan => {
@@ -15,6 +17,23 @@ export const getDataPesananAction = idPangkalan => {
           dispatch(pesanFailed(res.message));
         } else {
           dispatch(pesanSuccess(res));
+        }
+      })
+      .catch(err => {
+        dispatch(pesanFailed(err));
+      });
+  };
+};
+
+export const getHistoryPangkalan = idPangkalan => {
+  console.log('on action');
+  return dispatch => {
+    GET_HistoryPangkalan(idPangkalan)
+      .then(res => {
+        if (res.message) {
+          dispatch(pesanFailed(res.message));
+        } else {
+          dispatch(getHistorySuccess(res));
         }
       })
       .catch(err => {
@@ -36,5 +55,13 @@ export const pesanFailed = message => {
   return {
     type: PESAN_FAILED,
     status: FAILED,
+  };
+};
+
+export const getHistorySuccess = data => {
+  return {
+    type: SET_HISTORY,
+    history: data,
+    status: SUCCESS,
   };
 };

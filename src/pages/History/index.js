@@ -1,16 +1,39 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, Text, View, FlatList, Image} from 'react-native';
 import {fonts, colors} from '../../utils';
 import List from '../../components/moleculs/List';
-import {JSONHistory, ILHistory} from '../../assets';
+import {ILHistory} from '../../assets';
+import {useSelector, useDispatch} from 'react-redux';
+import {getHistoryPangkalan} from '../../redux/action/pesan';
 
 const History = ({navigation}) => {
-  const [data] = useState(JSONHistory.history);
+  const [data, setData] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const role = useSelector(state => state.authReducer.role);
+  const userId = useSelector(state => state.authReducer.userId);
+  const listHistory = useSelector(state => state.pesanReducer.listHistory);
+
+  useEffect(() => {
+    getDataHistory();
+  }, [getDataHistory]);
+
+  const getDataHistory = useCallback(() => {
+    if (role === 'pangkalan') {
+      console.log('on getDataHistory');
+      dispatch(getHistoryPangkalan(userId));
+      setData(listHistory);
+    }
+    if (role === 'Pembeli') {
+    }
+  }, [dispatch, role, userId, listHistory]);
 
   return (
     <View style={styles.page}>
       <View>
         <Text style={styles.title}>History</Text>
+        {console.log('data: ', data)}
         {data.length === 0 ? (
           <View style={styles.contentEmpty}>
             <Image source={ILHistory} style={styles.imageEmpty} />
@@ -23,9 +46,22 @@ const History = ({navigation}) => {
             keyExtractor={item => item.id}
             renderItem={item => (
               <List
-                onPress={() => navigation.navigate('DetailHistory')}
-                photo={{uri: item.item.photo}}
-                nama={item.item.pangkalan}
+                onPress={() =>
+                  navigation.navigate('DetailHistory', {
+                    dataHistory: item.item,
+                    role: role,
+                  })
+                }
+                photo={
+                  role === 'pangkalan'
+                    ? {uri: item.item.photoPembeli}
+                    : {uri: item.item.photoPangkalan}
+                }
+                nama={
+                  role === 'pangkalan'
+                    ? item.item.namaPembeli
+                    : item.item.namaPangkalan
+                }
                 desc={item.item.tanggal}
                 tanggal
               />

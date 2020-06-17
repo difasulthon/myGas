@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import numeral from 'numeral';
 import {
   Header,
   User,
@@ -8,7 +7,7 @@ import {
   TotalTagihanText,
   Button,
 } from '../../components';
-import {colors} from '../../utils';
+import {colors, rupiahFormat} from '../../utils';
 
 const DetailPesanan = ({navigation, route}) => {
   const type = route.params.type;
@@ -18,12 +17,6 @@ const DetailPesanan = ({navigation, route}) => {
   const hargaGas12Kg = dataPesanan.gas12Kg * 139000;
   const hargaBrightGas = dataPesanan.brightGas * 65000;
   const totalTagihan = hargaGas3Kg + hargaGas12Kg + hargaBrightGas;
-
-  const rupiahFormat = price => {
-    return numeral(price)
-      .format('0,0')
-      .replace(/,/g, '.');
-  };
 
   return (
     <View style={styles.page}>
