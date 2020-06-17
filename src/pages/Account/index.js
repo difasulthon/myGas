@@ -1,15 +1,19 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {DummyUser1} from '../../assets';
 import {List, User, Button, Gap} from '../../components';
 import {colors} from '../../utils';
+import {useSelector} from 'react-redux';
 
 const Account = ({navigation}) => {
+  const fullName = useSelector(state => state.authReducer.fullName);
+  const role = useSelector(state => state.authReducer.role);
+  const photo = useSelector(state => state.authReducer.photo);
+
   return (
     <View style={styles.page}>
       <View>
         <View style={styles.userWrapper}>
-          <User photo={DummyUser1} nama="Alex Morgan" role="Pembeli" />
+          <User photo={{uri: photo}} nama={fullName} role={role} />
         </View>
         <Gap height={30} />
         <List

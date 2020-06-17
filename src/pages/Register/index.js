@@ -9,7 +9,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {Header, Input, Gap, Button} from '../../components';
-import {colors, useForm, showError, SET_LOADING} from '../../utils';
+import {colors, useForm, showError} from '../../utils';
 import {ILNullPhoto, IconAddPhoto, IconRemovePhoto} from '../../assets';
 import {signUpAction} from '../../redux/action';
 
@@ -61,14 +61,13 @@ const Register = ({navigation}) => {
 
   useEffect(() => {
     if (userId !== '') {
+      console.log('to Login');
       navigation.replace('Login');
     }
   }, [navigation, role, userId]);
 
   const onSubmit = () => {
-    dispatch({type: SET_LOADING, status: true});
     dispatch(signUpAction(form, photoForDB));
-    dispatch({type: SET_LOADING, status: false});
   };
 
   return (

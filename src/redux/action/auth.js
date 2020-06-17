@@ -6,6 +6,7 @@ import {
   FAILED,
   AUTH_FAILED,
   showError,
+  POST_UpdateProfile,
 } from '../../utils';
 
 export const signUpAction = (form, photo) => {
@@ -27,6 +28,22 @@ export const signUpAction = (form, photo) => {
 export const loginAction = form => {
   return dispatch => {
     POST_Login(form.email, form.password)
+      .then(res => {
+        if (res.message) {
+          dispatch(authFailed(res.message));
+        } else {
+          dispatch(authSuccess(res));
+        }
+      })
+      .catch(err => {
+        dispatch(authFailed(err));
+      });
+  };
+};
+
+export const updateProfileAction = (form, photo) => {
+  return dispatch => {
+    POST_UpdateProfile(form.userId, form.fullName, form.password, photo)
       .then(res => {
         if (res.message) {
           dispatch(authFailed(res.message));

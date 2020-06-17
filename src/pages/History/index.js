@@ -17,6 +17,8 @@ const History = ({navigation}) => {
 
   useEffect(() => {
     getDataHistory();
+
+    return () => getDataHistory();
   }, [getDataHistory]);
 
   const getDataHistory = useCallback(() => {

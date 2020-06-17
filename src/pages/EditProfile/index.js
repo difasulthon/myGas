@@ -1,25 +1,74 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import {Header, Profile, Input, Button, Gap} from '../../components';
-import {colors} from '../../utils';
-import {DummyUser1} from '../../assets';
+import {colors, useForm, showError} from '../../utils';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateProfileAction} from '../../redux/action';
 
 const EditProfile = ({navigation}) => {
-  const [photo] = useState(DummyUser1);
+  const userId = useSelector(state => state.authReducer.userId);
+  const fullName = useSelector(state => state.authReducer.fullName);
+  const role = useSelector(state => state.authReducer.role);
+  const oldPhoto = useSelector(state => state.authReducer.photo);
+  const email = useSelector(state => state.authReducer.email);
+
+  const [photo, setPhoto] = useState(oldPhoto);
+  const [photoForDB, setPhotoForDB] = useState(oldPhoto);
+
+  const [form, setForm] = useForm({
+    userId: userId,
+    fullName: fullName,
+    role: role,
+    email: email,
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const getImage = () => {
+    ImagePicker.launchImageLibrary(
+      {quality: 1, maxWidth: 200, maxHeight: 200},
+      response => {
+        if (response.didCancel || response.error) {
+          showError('oops, sepertinya anda tidak memilih foto nya?');
+        } else {
+          setPhotoForDB(`data:${response.type};base64, ${response.data}`);
+          setPhoto(`data:${response.type};base64, ${response.data}`);
+        }
+      },
+    );
+  };
+
+  const updateProfile = () => {
+    dispatch(updateProfileAction(form, photoForDB));
+  };
+
   return (
     <View style={styles.page}>
       <Header title="Edit Profile" onPress={() => navigation.goBack()} />
       <View style={styles.content}>
-        <Gap height={16} />
-        <Profile isRemove photo={photo} />
-        <Gap height={16} />
-        <Input label="Full Name" />
-        <Gap height={16} />
-        <Input label="Email" value="alexmorgan@email.com" disable />
-        <Gap height={16} />
-        <Input label="Password" />
-        <Gap height={40} />
-        <Button title="Update" onPress={() => navigation.replace('MainApp')} />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Gap height={16} />
+          <Profile isRemove photo={{uri: photo}} onPress={getImage} />
+          <Gap height={16} />
+          <Input
+            label="Full Name"
+            value={form.fullName}
+            onChangeText={value => setForm('fullName', value)}
+          />
+          <Gap height={16} />
+          <Input label="Email" value={email} disable />
+          <Gap height={16} />
+          <Input
+            label="Password"
+            value={form.password}
+            onChangeText={value => setForm('password', value)}
+            secureTextEntry
+          />
+          <Gap height={40} />
+          <Button title="Update" onPress={updateProfile} />
+        </ScrollView>
       </View>
     </View>
   );

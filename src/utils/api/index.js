@@ -1,9 +1,11 @@
+import {POST, GET} from '../constants';
+
 const baseURL = 'https://my-gas.herokuapp.com';
 
 export async function POST_SignUp(fullName, role, email, password, photo) {
   try {
     let response = await fetch(baseURL + '/api/users/signup', {
-      method: 'POST',
+      method: POST,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -25,7 +27,7 @@ export async function POST_SignUp(fullName, role, email, password, photo) {
 export async function POST_Login(email, password) {
   try {
     let response = await fetch(baseURL + '/api/users/login', {
-      method: 'POST',
+      method: POST,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -52,7 +54,7 @@ export async function POST_InputStok(
 ) {
   try {
     let response = await fetch(baseURL + '/api/stok/createStok', {
-      method: 'POST',
+      method: POST,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -76,7 +78,7 @@ export async function POST_InputStok(
 export async function GET_DataPangkalan(idPangkalan) {
   try {
     let response = await fetch(baseURL + `/api/stok/${idPangkalan}`, {
-      method: 'GET',
+      method: GET,
     });
     let responseJSON = await response.json();
     return responseJSON;
@@ -88,7 +90,7 @@ export async function GET_DataPangkalan(idPangkalan) {
 export async function GET_DataPesanan(idPangkalan) {
   try {
     let response = await fetch(baseURL + `/api/pesan/pesanan/${idPangkalan}`, {
-      method: 'GET',
+      method: GET,
     });
     let responseJSON = await response.json();
     return responseJSON;
@@ -103,9 +105,29 @@ export async function GET_HistoryPangkalan(idPangkalan) {
     let response = await fetch(
       baseURL + `/api/pesan/historyPangkalan/${idPangkalan}`,
       {
-        method: 'GET',
+        method: GET,
       },
     );
+    let responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function POST_UpdateProfile(userId, fullName, password, photo) {
+  try {
+    let response = await fetch(baseURL + `/api/users/updateProfile/${userId}`, {
+      method: POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName: fullName,
+        password: password,
+        photo: photo,
+      }),
+    });
     let responseJSON = await response.json();
     return responseJSON;
   } catch (error) {
