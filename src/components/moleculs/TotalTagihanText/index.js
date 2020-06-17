@@ -3,13 +3,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import {fonts, colors} from '../../../utils';
 import {Gap} from '../../atoms';
 
-const TotalTagihanText = () => {
+const TotalTagihanText = ({total}) => {
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.totalText}>Total Tagihan</Text>
         <Gap height={5} />
-        <Text style={styles.price}>Rp 450.000</Text>
+        <Text style={styles.price}>Rp {total}</Text>
       </View>
     </View>
   );

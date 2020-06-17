@@ -4,7 +4,7 @@ import {colors, fonts} from '../../../utils';
 import IconOnly from './IconOnly';
 import BtnIconSend from './BtnIconSend';
 
-const Button = ({type, title, onPress, icon, disable}) => {
+const Button = ({type, title, onPress, icon, disable, total}) => {
   if (type === 'btn-icon-send') {
     return <BtnIconSend disable={disable} onPress={onPress} />;
   }
@@ -28,6 +28,7 @@ const Button = ({type, title, onPress, icon, disable}) => {
 
   return (
     <TouchableOpacity style={styles.container(type)} onPress={onPress}>
+      {console.log('data total: ', total)}
       <Text style={styles.text(type)}>{title}</Text>
     </TouchableOpacity>
   );

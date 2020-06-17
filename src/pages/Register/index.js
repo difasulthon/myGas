@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,7 +9,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {Header, Input, Gap, Button} from '../../components';
-import {colors, useForm, showError} from '../../utils';
+import {colors, useForm, showError, SET_LOADING} from '../../utils';
 import {ILNullPhoto, IconAddPhoto, IconRemovePhoto} from '../../assets';
 import {signUpAction} from '../../redux/action';
 
@@ -59,16 +59,16 @@ const Register = ({navigation}) => {
     );
   };
 
-  const onSubmit = () => {
-    dispatch(signUpAction(form, photoForDB));
+  useEffect(() => {
     if (userId !== '') {
-      if (role === 'pembeli') {
-        navigation.replace('MainApp');
-      }
-      if (role === 'pangkalan') {
-        navigation.replace('MainAppSeller');
-      }
+      navigation.replace('Login');
     }
+  }, [navigation, role, userId]);
+
+  const onSubmit = () => {
+    dispatch({type: SET_LOADING, status: true});
+    dispatch(signUpAction(form, photoForDB));
+    dispatch({type: SET_LOADING, status: false});
   };
 
   return (

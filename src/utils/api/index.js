@@ -1,6 +1,6 @@
 const baseURL = 'https://my-gas.herokuapp.com';
 
-export async function POST_Signup(fullName, role, email, password, photo) {
+export async function POST_SignUp(fullName, role, email, password, photo) {
   try {
     let response = await fetch(baseURL + '/api/users/signup', {
       method: 'POST',

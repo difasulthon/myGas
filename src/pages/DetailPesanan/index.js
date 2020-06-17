@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import numeral from 'numeral';
 import {
   Header,
   User,
@@ -8,10 +9,21 @@ import {
   Button,
 } from '../../components';
 import {colors} from '../../utils';
-import {DummyPangkalan1} from '../../assets';
 
 const DetailPesanan = ({navigation, route}) => {
   const type = route.params.type;
+  const dataPesanan = route.params.dataPesanan;
+
+  const hargaGas3Kg = dataPesanan.gas3Kg * 16500;
+  const hargaGas12Kg = dataPesanan.gas12Kg * 139000;
+  const hargaBrightGas = dataPesanan.brightGas * 65000;
+  const totalTagihan = hargaGas3Kg + hargaGas12Kg + hargaBrightGas;
+
+  const rupiahFormat = price => {
+    return numeral(price)
+      .format('0,0')
+      .replace(/,/g, '.');
+  };
 
   return (
     <View style={styles.page}>
@@ -19,14 +31,21 @@ const DetailPesanan = ({navigation, route}) => {
       <View style={styles.content}>
         <View style={styles.userWrapper}>
           <User
-            photo={DummyPangkalan1}
-            nama="Pangkalan LPG Wahyu"
-            role="Pangkalan"
+            photo={{uri: dataPesanan.photoPembeli}}
+            nama={dataPesanan.namaPembeli}
+            role={dataPesanan.tanggal}
           />
         </View>
         <View style={styles.border} />
         <View style={styles.ringkasanWrapper}>
-          <RingkasanText />
+          <RingkasanText
+            gas3Kg={dataPesanan.gas3Kg}
+            gas12Kg={dataPesanan.gas12Kg}
+            brightGas={dataPesanan.brightGas}
+            hargaGas3Kg={rupiahFormat(hargaGas3Kg)}
+            hargaGas12Kg={rupiahFormat(hargaGas12Kg)}
+            hargaBrightGas={rupiahFormat(hargaBrightGas)}
+          />
         </View>
         <View style={styles.border} />
         {type === 'buyer' ? (
@@ -36,7 +55,7 @@ const DetailPesanan = ({navigation, route}) => {
           </View>
         ) : (
           <View style={styles.tagihanWrapperSeller}>
-            <TotalTagihanText />
+            <TotalTagihanText total={rupiahFormat(totalTagihan)} />
             <View style={styles.buttonWrapper}>
               <Button title="Tolak" type="tolak" />
               <Button title="Terima" type="pesan" />

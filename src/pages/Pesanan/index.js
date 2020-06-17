@@ -40,7 +40,10 @@ const Pesanan = ({navigation}) => {
           renderItem={item => (
             <List
               onPress={() =>
-                navigation.navigate('DetailPesanan', {type: 'seller'})
+                navigation.navigate('DetailPesanan', {
+                  type: 'seller',
+                  dataPesanan: item.item,
+                })
               }
               photo={{uri: item.item.photoPembeli}}
               nama={item.item.namaPembeli}
