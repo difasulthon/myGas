@@ -4,38 +4,36 @@ import {fonts, colors} from '../../utils';
 import List from '../../components/moleculs/List';
 import {ILHistory} from '../../assets';
 import {useSelector, useDispatch} from 'react-redux';
-import {getHistoryPangkalan} from '../../redux/action/pesan';
+import {getHistoryPangkalan, getHistoryPembeli} from '../../redux/action/pesan';
 
 const History = ({navigation}) => {
   const [data, setData] = useState([]);
-
-  const dispatch = useDispatch();
 
   const role = useSelector(state => state.authReducer.role);
   const userId = useSelector(state => state.authReducer.userId);
   const listHistory = useSelector(state => state.pesanReducer.listHistory);
 
-  useEffect(() => {
-    getDataHistory();
-
-    return () => getDataHistory();
-  }, [getDataHistory]);
+  const dispatch = useDispatch();
 
   const getDataHistory = useCallback(() => {
     if (role === 'pangkalan') {
-      console.log('on getDataHistory');
       dispatch(getHistoryPangkalan(userId));
       setData(listHistory);
     }
     if (role === 'Pembeli') {
+      dispatch(getHistoryPembeli(userId));
+      setData(listHistory);
     }
   }, [dispatch, role, userId, listHistory]);
+
+  useEffect(() => {
+    getDataHistory();
+  }, [getDataHistory]);
 
   return (
     <View style={styles.page}>
       <View>
         <Text style={styles.title}>History</Text>
-        {console.log('data: ', data)}
         {data.length === 0 ? (
           <View style={styles.contentEmpty}>
             <Image source={ILHistory} style={styles.imageEmpty} />

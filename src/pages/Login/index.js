@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {ILLogin} from '../../assets';
 import {Input, Button, Link, Gap} from '../../components';
-import {colors, fonts, useForm} from '../../utils';
+import {colors, fonts, useForm, SET_LOADING} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginAction} from '../../redux/action';
 
@@ -20,15 +20,18 @@ export default function Login({navigation}) {
   useEffect(() => {
     if (userId !== '') {
       if (role === 'Pembeli') {
+        dispatch({type: SET_LOADING, status: false});
         navigation.replace('MainApp');
       }
       if (role === 'pangkalan') {
+        dispatch({type: SET_LOADING, status: false});
         navigation.replace('MainAppSeller');
       }
     }
-  }, [navigation, role, userId]);
+  }, [navigation, role, userId, dispatch]);
 
   const onSubmit = () => {
+    dispatch({type: SET_LOADING, status: true});
     dispatch(loginAction(form));
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {User, Header, Gap, CardGas, Button} from '../../components';
@@ -19,12 +20,8 @@ const DetailPangkalan = ({navigation, route}) => {
 
   const dispatch = useDispatch();
 
-  console.log(
-    `pesan: ${gas3Kg} gas3Kg ${gas12Kg} gas12Kg ${brightGas} brightGas`,
-  );
-
   const submitPesan = () => {
-    let total = gas3Kg + gas12Kg + brightGas;
+    let total = parseInt(gas3Kg) + parseInt(gas12Kg) + parseInt(brightGas);
     dispatch(
       addPesanAction(
         dataPangkalan.idPangkalan,

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, Alert} from 'react-native';
 import {List, User, Button, Gap} from '../../components';
-import {colors} from '../../utils';
+import {colors, SET_LOADING} from '../../utils';
 import {useSelector, useDispatch} from 'react-redux';
 import {logOutAction} from '../../redux/action/auth';
 
@@ -15,9 +15,10 @@ const Account = ({navigation}) => {
 
   useEffect(() => {
     if (userId === '') {
+      dispatch({type: SET_LOADING, status: false});
       navigation.replace('Login');
     }
-  }, [navigation, userId]);
+  }, [navigation, userId, dispatch]);
 
   const logOut = () => {
     Alert.alert('Logout', 'Apakah anda yakin ?', [
@@ -30,6 +31,7 @@ const Account = ({navigation}) => {
       {
         text: 'Ya',
         onPress: () => {
+          dispatch({type: SET_LOADING, status: true});
           dispatch(logOutAction());
         },
       },

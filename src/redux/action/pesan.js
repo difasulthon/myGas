@@ -9,6 +9,7 @@ import {
   SET_HISTORY,
   POST_CreatePesan,
   CREATE_PESAN,
+  GET_HistoryPembeli,
 } from '../../utils';
 
 export const getDataPesananAction = idPangkalan => {
@@ -28,9 +29,24 @@ export const getDataPesananAction = idPangkalan => {
 };
 
 export const getHistoryPangkalan = idPangkalan => {
-  console.log('on action');
   return dispatch => {
     GET_HistoryPangkalan(idPangkalan)
+      .then(res => {
+        if (res.message) {
+          dispatch(pesanFailed(res.message));
+        } else {
+          dispatch(getHistorySuccess(res));
+        }
+      })
+      .catch(err => {
+        dispatch(pesanFailed(err));
+      });
+  };
+};
+
+export const getHistoryPembeli = idPembeli => {
+  return dispatch => {
+    GET_HistoryPembeli(idPembeli)
       .then(res => {
         if (res.message) {
           dispatch(pesanFailed(res.message));

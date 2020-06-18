@@ -100,10 +100,24 @@ export async function GET_DataPesanan(idPangkalan) {
 }
 
 export async function GET_HistoryPangkalan(idPangkalan) {
-  console.log('on API');
   try {
     let response = await fetch(
       baseURL + `/api/pesan/historyPangkalan/${idPangkalan}`,
+      {
+        method: GET,
+      },
+    );
+    let responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function GET_HistoryPembeli(idPembeli) {
+  try {
+    let response = await fetch(
+      baseURL + `/api/pesan/historyPembeli/${idPembeli}`,
       {
         method: GET,
       },
@@ -160,7 +174,7 @@ export async function POST_CreatePesan(
   total,
 ) {
   try {
-    let response = await fetch(baseURL + '/ceratePesan', {
+    let response = await fetch(baseURL + '/api/pesan/createPesan', {
       method: POST,
       headers: {
         'Content-Type': 'application/json',

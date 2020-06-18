@@ -21,8 +21,6 @@ const Pesanan = ({navigation}) => {
 
   useEffect(() => {
     getDataPesanan();
-
-    return () => getDataPesanan();
   }, [getDataPesanan]);
 
   return (

@@ -37,7 +37,6 @@ const pesanReducer = (state = initialState, action) => {
         status: action.status,
       });
     case SET_HISTORY:
-      console.log('data history: ', action.history.pesan);
       return Object.assign({}, state, {
         listHistory: action.history.pesan,
       });
