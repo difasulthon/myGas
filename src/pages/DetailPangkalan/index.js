@@ -2,7 +2,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {User, Header, Gap, CardGas, Button} from '../../components';
-import {DummyPangkalan1} from '../../assets';
 import {colors} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {addPesanAction} from '../../redux/action';
