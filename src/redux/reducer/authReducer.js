@@ -13,7 +13,6 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      console.log('nama: ', action.user.fullName);
       return Object.assign({}, state, {
         userId: action.user.userId,
         fullName: action.user.fullName,

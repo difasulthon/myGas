@@ -77,7 +77,6 @@ export async function POST_InputStok(
 
 export async function GET_DataPangkalan(idPangkalan) {
   try {
-    console.log('on api: ', idPangkalan);
     let response = await fetch(baseURL + `/api/stok/${idPangkalan}`, {
       method: GET,
     });
@@ -202,9 +201,7 @@ export async function POST_CreatePesan(
 }
 
 export async function POST_UpdateStatusPesan(idPangkalan, idPembeli, status) {
-  console.log('on api: ', idPangkalan, idPembeli, status);
   try {
-    console.log('on api: ', idPangkalan, idPembeli, status);
     let response = await fetch(baseURL + '/api/pesan/updateStatus', {
       method: POST,
       headers: {

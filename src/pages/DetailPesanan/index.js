@@ -34,7 +34,6 @@ const DetailPesanan = ({navigation, route}) => {
   };
 
   const terima = () => {
-    console.log('on terima function');
     updatePesan(userId, dataPesanan.idPembeli, 'TERIMA');
   };
 

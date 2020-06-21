@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Alert, ScrollView} from 'react-native';
 import Moment from 'moment';
 import {Header, CardTime, Input, Button, Gap} from '../../components';
-import {colors, useForm} from '../../utils';
+import {colors, useForm, SET_LOADING} from '../../utils';
 import {useSelector, useDispatch} from 'react-redux';
 import {inputStok} from '../../redux/action';
 
@@ -46,6 +46,7 @@ const InputStok = ({navigation}) => {
       {
         text: 'Ya',
         onPress: () => {
+          dispatch({type: SET_LOADING, status: true});
           let totalGas =
             parseInt(form.gas3Kg) +
             parseInt(form.gas12Kg) +
@@ -54,6 +55,8 @@ const InputStok = ({navigation}) => {
             inputStok(idPangkalan, namaPangkalan, photo, totalGas, form),
             setForm('reset'),
           );
+          dispatch({type: SET_LOADING, status: false});
+          navigation.goBack();
         },
       },
     ]);

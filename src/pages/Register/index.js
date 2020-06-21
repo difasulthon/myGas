@@ -61,7 +61,6 @@ const Register = ({navigation}) => {
 
   useEffect(() => {
     if (userId !== '') {
-      console.log('to Login');
       dispatch({type: SET_LOADING, status: false});
       navigation.goBack();
     }

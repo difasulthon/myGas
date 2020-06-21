@@ -74,7 +74,7 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    padding: 40,
+    padding: '10%',
     paddingBottom: 0,
     backgroundColor: colors.white,
     justifyContent: 'space-between',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.primary[700],
     color: colors.text.primary,
-    maxWidth: 150,
+    maxWidth: '44%',
   },
   version: {
     textAlign: 'center',

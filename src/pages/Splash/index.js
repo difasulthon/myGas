@@ -7,8 +7,6 @@ import {useSelector} from 'react-redux';
 const Splash = ({navigation}) => {
   const userId = useSelector(state => state.authReducer.userId);
   const role = useSelector(state => state.authReducer.role);
-  console.log('userId: ', userId);
-  console.log('role: ', role);
 
   useEffect(() => {
     setTimeout(() => {

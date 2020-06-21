@@ -21,9 +21,6 @@ const HomeSeller = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  console.log('total stok: ', stok);
-  console.log('total pesanan: ', pesanan);
-
   useEffect(() => {
     getDataStokPesanan();
   }, [getDataStokPesanan]);

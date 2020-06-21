@@ -12,7 +12,6 @@ import {
   GET_HistoryPembeli,
   POST_UpdateStatusPesan,
 } from '../../utils';
-import {useDispatch} from 'react-redux';
 
 export const getDataPesananAction = idPangkalan => {
   return dispatch => {
