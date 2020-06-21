@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,18 +9,30 @@ import {
 import {ILLogoHome, ILHomeSeller} from '../../assets';
 import {Gap, CardSeller} from '../../components';
 import {colors, fonts} from '../../utils';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {getDataPangkalan} from '../../redux/action';
 
 const HomeSeller = ({navigation}) => {
-  const [stok, setStok] = useState(null);
-  const [pesanan, setPesanan] = useState(null);
+  const [stok, setStok] = useState(0);
+  const [pesanan, setPesanan] = useState(0);
   const totalStok = useSelector(state => state.stokReducer.totalStok);
   const totalPesanan = useSelector(state => state.pesanReducer.totalPesanan);
+  const userId = useSelector(state => state.authReducer.userId);
+
+  const dispatch = useDispatch();
+
+  console.log('total stok: ', stok);
+  console.log('total pesanan: ', pesanan);
 
   useEffect(() => {
+    getDataStokPesanan();
+  }, [getDataStokPesanan]);
+
+  const getDataStokPesanan = useCallback(() => {
+    dispatch(getDataPangkalan(userId));
     setStok(totalStok);
     setPesanan(totalPesanan);
-  }, [totalStok, totalPesanan]);
+  }, [totalPesanan, totalStok, userId, dispatch]);
 
   return (
     <View style={styles.page}>

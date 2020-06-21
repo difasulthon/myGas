@@ -10,7 +10,9 @@ import {
   POST_CreatePesan,
   CREATE_PESAN,
   GET_HistoryPembeli,
+  POST_UpdateStatusPesan,
 } from '../../utils';
+import {useDispatch} from 'react-redux';
 
 export const getDataPesananAction = idPangkalan => {
   return dispatch => {
@@ -96,6 +98,10 @@ export const addPesanAction = (
         dispatch(pesanFailed(err));
       });
   };
+};
+
+export const updatePesan = (idPangkalan, idPembeli, status) => {
+  POST_UpdateStatusPesan(idPangkalan, idPembeli, status);
 };
 
 export const pesanSuccess = data => {

@@ -9,10 +9,14 @@ import {
   Button,
 } from '../../components';
 import {colors} from '../../utils';
+import {useSelector} from 'react-redux';
+import {updatePesan} from '../../redux/action';
 
 const DetailPesanan = ({navigation, route}) => {
   const type = route.params.type;
   const dataPesanan = route.params.dataPesanan;
+
+  const userId = useSelector(state => state.authReducer.userId);
 
   const hargaGas3Kg = dataPesanan.gas3Kg * 16500;
   const hargaGas12Kg = dataPesanan.gas12Kg * 139000;
@@ -23,6 +27,15 @@ const DetailPesanan = ({navigation, route}) => {
     return numeral(price)
       .format('0,0')
       .replace(/,/g, '.');
+  };
+
+  const tolak = () => {
+    updatePesan(userId, dataPesanan.idPembeli, 'TOLAK');
+  };
+
+  const terima = () => {
+    console.log('on terima function');
+    updatePesan(userId, dataPesanan.idPembeli, 'TERIMA');
   };
 
   return (
@@ -57,8 +70,8 @@ const DetailPesanan = ({navigation, route}) => {
           <View style={styles.tagihanWrapperSeller}>
             <TotalTagihanText total={rupiahFormat(totalTagihan)} />
             <View style={styles.buttonWrapper}>
-              <Button title="Tolak" type="tolak" />
-              <Button title="Terima" type="pesan" />
+              <Button title="Tolak" type="tolak" onPress={tolak} />
+              <Button title="Terima" type="pesan" onPress={terima} />
             </View>
           </View>
         )}

@@ -42,13 +42,15 @@ export const inputStok = (
 };
 
 export const getDataPangkalan = idPangkalan => {
+  console.log('on action: ', idPangkalan);
   return dispatch => {
+    console.log('on action: ', idPangkalan);
     GET_DataPangkalan(idPangkalan)
       .then(res => {
         if (res.message) {
           dispatch(stokFailed(res.message));
         } else {
-          return res;
+          dispatch(inputStokSuccess(res));
         }
       })
       .catch(err => {
