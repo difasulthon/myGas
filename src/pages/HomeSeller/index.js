@@ -23,6 +23,8 @@ const HomeSeller = ({navigation}) => {
 
   useEffect(() => {
     getDataStokPesanan();
+
+    return () => getDataStokPesanan();
   }, [getDataStokPesanan]);
 
   const getDataStokPesanan = useCallback(() => {

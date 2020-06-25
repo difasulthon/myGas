@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View, ScrollView, Alert} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {Header, Profile, Input, Button, Gap} from '../../components';
-import {colors, useForm, showError} from '../../utils';
+import {colors, useForm, showError, showSuccess} from '../../utils';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateProfileAction} from '../../redux/action';
 
@@ -52,6 +52,8 @@ const EditProfile = ({navigation}) => {
         text: 'Ya',
         onPress: () => {
           dispatch(updateProfileAction(form, photoForDB));
+          showSuccess('Edit profile sukses');
+          navigation.goBack();
         },
       },
     ]);

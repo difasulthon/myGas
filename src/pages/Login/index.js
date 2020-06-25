@@ -33,6 +33,7 @@ export default function Login({navigation}) {
   const onSubmit = () => {
     dispatch({type: SET_LOADING, status: true});
     dispatch(loginAction(form));
+    dispatch({type: SET_LOADING, status: false});
   };
 
   return (

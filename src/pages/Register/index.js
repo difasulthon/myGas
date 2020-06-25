@@ -61,8 +61,14 @@ const Register = ({navigation}) => {
 
   useEffect(() => {
     if (userId !== '') {
-      dispatch({type: SET_LOADING, status: false});
-      navigation.goBack();
+      if (role === 'Pembeli') {
+        dispatch({type: SET_LOADING, status: false});
+        navigation.replace('MainApp');
+      }
+      if (role === 'pangkalan') {
+        dispatch({type: SET_LOADING, status: false});
+        navigation.replace('MainAppSeller');
+      }
     }
   }, [navigation, role, userId, dispatch]);
 

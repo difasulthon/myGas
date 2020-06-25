@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Alert} from 'react-native';
 import numeral from 'numeral';
 import {
   Header,
@@ -8,7 +8,7 @@ import {
   TotalTagihanText,
   Button,
 } from '../../components';
-import {colors} from '../../utils';
+import {colors, showSuccess} from '../../utils';
 import {useSelector} from 'react-redux';
 import {updatePesan} from '../../redux/action';
 
@@ -30,11 +30,41 @@ const DetailPesanan = ({navigation, route}) => {
   };
 
   const tolak = () => {
-    updatePesan(userId, dataPesanan.idPembeli, 'TOLAK');
+    Alert.alert('Konfirmasi', 'Apakah anda yakin akan menolak pesanan?', [
+      {
+        text: 'Batal',
+        onPress: () => {
+          return;
+        },
+      },
+      {
+        text: 'Ya',
+        onPress: () => {
+          updatePesan(userId, dataPesanan.idPembeli, 'TOLAK');
+          showSuccess('Tolak pesan sukses');
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   const terima = () => {
-    updatePesan(userId, dataPesanan.idPembeli, 'TERIMA');
+    Alert.alert('Konfirmasi', 'Apakah anda yakin akan menerima pesanan?', [
+      {
+        text: 'Batal',
+        onPress: () => {
+          return;
+        },
+      },
+      {
+        text: 'Ya',
+        onPress: () => {
+          updatePesan(userId, dataPesanan.idPembeli, 'TERIMA');
+          showSuccess('Terima pesan sukses');
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   return (

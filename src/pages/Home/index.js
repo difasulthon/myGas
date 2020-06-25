@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View, ImageBackground, FlatList} from 'react-native';
 import {colors} from '../../utils';
 import {Input, Card} from '../../components';
-import {IconSearch, ILHomeBuyer, JSONPangkalan} from '../../assets';
+import {IconSearch, ILHomeBuyer} from '../../assets';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllStok} from '../../redux/action/stok';
 

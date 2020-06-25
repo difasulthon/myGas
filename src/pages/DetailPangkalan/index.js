@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {User, Header, Gap, CardGas, Button} from '../../components';
-import {colors} from '../../utils';
+import {colors, showSuccess} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {addPesanAction} from '../../redux/action';
 
@@ -35,6 +35,8 @@ const DetailPangkalan = ({navigation, route}) => {
         total,
       ),
     );
+    showSuccess('Input pesan sukses');
+    navigation.goBack();
   };
 
   return (
