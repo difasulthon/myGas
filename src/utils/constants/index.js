@@ -12,6 +12,8 @@ export const SET_HISTORY = 'SET_HISTORY';
 export const LOG_OUT = 'LOG_OUT';
 export const SET_LIST_STOK = 'SET_LIST_STOK';
 export const CREATE_PESAN = 'CREATE_PESAN';
+export const LOG_OUT_PESAN = 'LOG_OUT_PESAN';
+export const LOG_OUT_STOK = 'LOG_OUT_STOK';
 
 export const POST = 'POST';
 export const GET = 'GET';

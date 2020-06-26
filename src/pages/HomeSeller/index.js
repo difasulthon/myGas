@@ -24,7 +24,7 @@ const HomeSeller = ({navigation}) => {
   useEffect(() => {
     getDataStokPesanan();
 
-    return () => getDataStokPesanan();
+    return () => getDataStokPesanan;
   }, [getDataStokPesanan]);
 
   const getDataStokPesanan = useCallback(() => {
@@ -38,7 +38,7 @@ const HomeSeller = ({navigation}) => {
       <Gap height={20} />
       <ILLogoHome style={styles.logo} />
       <ImageBackground source={ILHomeSeller} style={styles.bg} />
-      <TouchableOpacity style={styles.kotak}>
+      <TouchableOpacity style={styles.kotak} onPress={getDataStokPesanan}>
         <View>
           <Text style={styles.textDesc}>Pesanan</Text>
           <Text style={styles.textDesc}>{pesanan}</Text>

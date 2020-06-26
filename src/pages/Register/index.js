@@ -9,7 +9,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {Header, Input, Gap, Button} from '../../components';
-import {colors, useForm, showError, SET_LOADING} from '../../utils';
+import {colors, useForm, showError} from '../../utils';
 import {ILNullPhoto, IconAddPhoto, IconRemovePhoto} from '../../assets';
 import {signUpAction} from '../../redux/action';
 
@@ -62,18 +62,15 @@ const Register = ({navigation}) => {
   useEffect(() => {
     if (userId !== '') {
       if (role === 'Pembeli') {
-        dispatch({type: SET_LOADING, status: false});
         navigation.replace('MainApp');
       }
       if (role === 'pangkalan') {
-        dispatch({type: SET_LOADING, status: false});
         navigation.replace('MainAppSeller');
       }
     }
   }, [navigation, role, userId, dispatch]);
 
   const onSubmit = () => {
-    dispatch({type: SET_LOADING, status: true});
     dispatch(signUpAction(form, photoForDB));
   };
 

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {ILLogin} from '../../assets';
 import {Input, Button, Link, Gap} from '../../components';
-import {colors, fonts, useForm, SET_LOADING} from '../../utils';
+import {colors, fonts, useForm} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginAction} from '../../redux/action';
 
@@ -19,21 +19,18 @@ export default function Login({navigation}) {
 
   useEffect(() => {
     if (userId !== '') {
+      console.log('role: ', role);
       if (role === 'Pembeli') {
-        dispatch({type: SET_LOADING, status: false});
         navigation.replace('MainApp');
       }
       if (role === 'pangkalan') {
-        dispatch({type: SET_LOADING, status: false});
         navigation.replace('MainAppSeller');
       }
     }
-  }, [navigation, role, userId, dispatch]);
+  }, [userId, role, navigation]);
 
   const onSubmit = () => {
-    dispatch({type: SET_LOADING, status: true});
     dispatch(loginAction(form));
-    dispatch({type: SET_LOADING, status: false});
   };
 
   return (
@@ -67,7 +64,7 @@ export default function Login({navigation}) {
           />
         </ScrollView>
       </View>
-      <Text style={styles.version}>V 1.0.0</Text>
+      <Text style={styles.version}>V 1.0.2</Text>
     </View>
   );
 }

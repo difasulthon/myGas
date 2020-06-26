@@ -1,4 +1,9 @@
-import {INPUT_STOK_SUCCESS, STOK_FAILED, SET_LIST_STOK} from '../../utils';
+import {
+  INPUT_STOK_SUCCESS,
+  STOK_FAILED,
+  SET_LIST_STOK,
+  LOG_OUT_STOK,
+} from '../../utils';
 
 const initialState = {
   idPangkalan: '',
@@ -33,6 +38,18 @@ const stokReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         listStok: action.stok.stok,
         status: action.status,
+      });
+    case LOG_OUT_STOK:
+      return Object.assign({}, state, {
+        idPangkalan: '',
+        namaPangkalan: '',
+        photo: '',
+        totalStok: '',
+        gas3Kg: '',
+        gas12Kg: '',
+        brightGas: '',
+        listStok: '',
+        status: '',
       });
   }
   return state;

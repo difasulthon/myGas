@@ -3,6 +3,7 @@ import {
   PESAN_FAILED,
   SET_HISTORY,
   CREATE_PESAN,
+  LOG_OUT_PESAN,
 } from '../../utils';
 
 const initialState = {
@@ -55,6 +56,25 @@ const pesanReducer = (state = initialState, action) => {
         total: action.pesan.pesan.total,
         statusPesanan: action.pesan.pesan.status,
         status: action.status,
+      });
+    case LOG_OUT_PESAN:
+      return Object.assign({}, state, {
+        idPangkalan: '',
+        idPembeli: '',
+        namaPangkalan: '',
+        namaPembeli: '',
+        photoPembeli: '',
+        photoPangkalan: '',
+        tanggal: '',
+        gas3Kg: '',
+        gas12Kg: '',
+        brightGas: '',
+        total: '',
+        statusPesanan: '',
+        status: '',
+        listPesanan: [],
+        totalPesanan: null,
+        listHistory: [],
       });
   }
   return state;

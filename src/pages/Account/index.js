@@ -10,15 +10,17 @@ const Account = ({navigation}) => {
   const role = useSelector(state => state.authReducer.role);
   const photo = useSelector(state => state.authReducer.photo);
   const userId = useSelector(state => state.authReducer.userId);
+  const idPangkalan = useSelector(state => state.stokReducer.idPangkalan);
+  const idPembeli = useSelector(state => state.pesanReducer.idPembeli);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userId === '') {
+    if (userId === '' && idPangkalan === '' && idPembeli === '') {
       dispatch({type: SET_LOADING, status: false});
       navigation.replace('Login');
     }
-  }, [navigation, userId, dispatch]);
+  }, [navigation, userId, dispatch, idPangkalan, idPembeli]);
 
   const logOut = () => {
     Alert.alert('Logout', 'Apakah anda yakin ?', [
